@@ -40,3 +40,11 @@ class IPv4Address:
 
         self._ip = address
 
+    def convert_ip_to_number(self):
+        pow = 3
+        decimal_number = 0
+
+        for quad in self._ip.split('.'):
+            decimal_number += (int(quad) * (256 ** pow))
+            pow -= 1
+        return (decimal_number)
