@@ -1,6 +1,15 @@
 class IPv4Address:
 
     def valid_address(self, address):
+        if type(address) is int:
+            max = 4294967295
+
+            if address > max or address < 0:
+                print('bbbbb')
+                return False
+            else:
+                return True
+
         try:
             max = 4
             index = 0
@@ -25,27 +34,18 @@ class IPv4Address:
         return True
 
     def __init__(self, address):
-        if type(address) is int:
-            number_ip = 4294967295
-            if address > number_ip or address < 0 :
-                print('Invalid address number!')
-                return
-        elif type(address) is str:
-            if self.valid_address(address) is False:
-                print('Invalid address!')
-                return
-        else:
-            print('invalid address')
+        if self.valid_address(address) is False:
+            print('Invalid address!')
             return
-
         self._ip = address
 
     def convert_ip_to_number(self):
         pow = 3
         num = 0
 
-        if type(self._ip) is int:
-            return self._ip
+        print(self._ip)
+        if type(self._ip) is not str:
+            return int(self._ip)
 
         for quad in self._ip.split('.'):
             num += (int(quad) * (256 ** pow))
@@ -57,15 +57,37 @@ class IPv4Address:
         index = 0
         address = [0, 0, 0, 0]
         point = '.'
+        ip = self._ip
 
         if type(self._ip) is str:
             return self._ip
 
         while index < 4:
-            num = int(self._ip / div)
-            self._ip -= div * num
+            num = int(ip / div)
+            ip -= div * num
             address[index] = str(num)
             div /= 256
             index += 1
 
         return point.join(address)
+
+    def less_than(self, address):
+        if self.valid_address(address):
+            address2 = IPv4Address(address)
+
+            return self.convert_ip_to_number() < address2.convert_ip_to_number()
+
+    def greater_than(self, address):
+        return not self.less_than(address)
+
+    def equals(self, address):
+        if self.valid_address(address):
+            address2 = IPv4Address(address)
+
+            return self.convert_ip_to_number() == address2.convert_ip_to_number()
+
+    def to_string(self):
+        return self.convert_number_to_ip()
+
+    def to_long(self):
+        return self.convert_ip_to_number()
