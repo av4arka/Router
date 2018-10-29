@@ -5,7 +5,7 @@ class IPv4Address:
             max = 4294967295
 
             if address > max or address < 0:
-                print('bbbbb')
+                print('Invalid address!')
                 return False
             else:
                 return True
@@ -43,7 +43,6 @@ class IPv4Address:
         pow = 3
         num = 0
 
-        print(self._ip)
         if type(self._ip) is not str:
             return int(self._ip)
 
