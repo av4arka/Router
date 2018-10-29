@@ -1,0 +1,6 @@
+venv/
+target/
+
+.idea
+.DS_Store
+.xml
