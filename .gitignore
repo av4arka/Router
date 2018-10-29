@@ -1,7 +1,5 @@
 venv/
-.idea/
 
-.idea
 .DS_Store
 .xml
 .txt
