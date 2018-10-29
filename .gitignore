@@ -1,9 +1,7 @@
 venv/
 .idea/
-target/
 
 .idea
 .DS_Store
 .xml
 .txt
-.gitignore
