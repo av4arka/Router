@@ -52,5 +52,19 @@ class Network:
         broadcast_address = bin_address[0:self._mask] + bit_sequence
         return IPv4Address(int(broadcast_address, 2))
 
+    def contains(self, address):
+        try:
+            number_address = address.to_long()
+            min_address = self.get_first_usable_address().to_long()
+            max_address = self.get_last_usable_address().to_long()
+            if number_address < min_address or number_address > max_address:
+                return False
+
+            return True
+        except ValueError:
+            return False
+
+
+
 
 
