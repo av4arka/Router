@@ -8,9 +8,9 @@ class Network:
             print('Invalid address!')
             return
 
-        if 0 < mask > 32:
-             print('Invalid mask!')
-             return
+        if type(mask) is not int or mask < 0 or mask > 32:
+            print('Invalid mask!')
+            return
         self._mask = mask
 
         bin_address = bin(address.to_long())[2:]
