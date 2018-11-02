@@ -28,9 +28,12 @@ class Network:
         last_address = self.get_broadcast_address().to_long() - 1
         return IPv4Address(last_address)
 
+    def get_mask(self):
+        return (1<<32) - (1<<32>>self._mask)
+
     def get_mask_string(self):
-        str_mask  = (1<<32) - (1<<32>>self._mask)
-        return IPv4Address(str_mask).to_string()
+        ip_address = IPv4Address(self.get_mask()).to_string()
+        return ip_address
 
     def get_mask_length(self):
         return self._mask
