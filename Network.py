@@ -19,6 +19,8 @@ class Network:
 
         self._address = network_address
 
+    def get_address(self):
+        return self._address
 
     def get_first_usable_address(self):
         first_address = self._address.to_long() + 1
@@ -74,7 +76,4 @@ class Network:
         if address[0] == '172' and int(address[1]) > 15 and int(address[1]) < 32:
             return False
         return True
-
-
-
 
