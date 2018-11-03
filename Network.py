@@ -78,7 +78,8 @@ class Network:
         return True
 
     def get_total_hosts(self):
+        if self._mask == 32:
+            return 0
+
         total_free_bit = 32 - self._mask
         return (2**total_free_bit) - 2
-
-
