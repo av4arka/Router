@@ -64,6 +64,16 @@ class Network:
         except ValueError:
             return False
 
+    def is_public(self):
+        address = self._address.to_string().split('.')
+
+        if address[0] == '10' and self._mask > 7:
+            return False
+        if address[0] == '192' and address[1] == '168' and self._mask > 15:
+            return False
+        if address[0] == '172' and int(address[1]) > 15 and int(address[1]) < 32:
+            return False
+        return True
 
 
 
