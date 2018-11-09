@@ -3,14 +3,13 @@ from IPv4Address import  IPv4Address
 
 class Network:
 
-    def __init__(self, address, mask):
-        if type(address) is not IPv4Address:
-            print('Invalid address!')
-            return
 
-        if type(mask) is not int or mask < 0 or mask > 32:
-            print('Invalid mask!')
-            return
+    def __init__(self, address, mask):
+        if type(address) is not IPv4Address or type(mask) is not int:
+            raise TypeError
+
+        if  mask < 0 or mask > 32:
+            raise ValueError
         self._mask = mask
 
         bin_address = bin(address.to_long())[2:]
