@@ -22,8 +22,13 @@ class Network:
     def __repr__(self):
         return '%s/%d' % (self._address.to_string(), self._mask)
 
-    def get_address(self):
+    @property
+    def address(self):
         return self._address
+
+    @property
+    def mask(self):
+        return (1 << 32) - (1 << 32 >> self._mask)
 
     def get_first_usable_address(self):
         first_address = self._address.to_long() + 1
@@ -33,11 +38,9 @@ class Network:
         last_address = self.get_broadcast_address().to_long() - 1
         return IPv4Address(last_address)
 
-    def get_mask(self):
-        return (1<<32) - (1<<32>>self._mask)
 
     def get_mask_string(self):
-        ip_address = IPv4Address(self.get_mask()).to_string()
+        ip_address = IPv4Address(self.mask).to_string()
         return ip_address
 
     def get_mask_length(self):
@@ -90,7 +93,7 @@ class Network:
 
     def get_subnets(self):
         new_mask = self._mask - 1
-        subnet_free = bin(self._address.to_long())[2:]
+        subnet_free = str(bin(self._address.to_long())[2:])
         print(subnet_free)
 
-        raise AttributeError
+
