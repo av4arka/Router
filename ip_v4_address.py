@@ -36,7 +36,7 @@ class IPv4Address:
 
     def __init__(self, address):
         if self.valid_address(address) is False:
-            raise IPv4Address('Invalid address!')
+            raise InvalidIPv4Address('Invalid address!')
         self._ip = address
 
     def convert_ip_to_number(self):
