@@ -1,3 +1,5 @@
+from exceptions import InvalidIPv4Address
+
 class IPv4Address:
 
     def valid_address(self, address):
@@ -5,7 +7,6 @@ class IPv4Address:
             max = 4294967295
 
             if address > max or address < 0:
-                print('Invalid address!')
                 return False
             else:
                 return True
@@ -35,8 +36,7 @@ class IPv4Address:
 
     def __init__(self, address):
         if self.valid_address(address) is False:
-            print('Invalid address!')
-            return
+            raise IPv4Address('Invalid address!')
         self._ip = address
 
     def convert_ip_to_number(self):
