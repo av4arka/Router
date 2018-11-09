@@ -1,4 +1,4 @@
-from IPv4Address import  IPv4Address
+from ip_v4_address import  IPv4Address
 
 
 class Network:
@@ -17,6 +17,9 @@ class Network:
         network_address = IPv4Address(int(bin_address, 2) & int(bin_mask, 2))
 
         self._address = network_address
+
+    def __repr__(self):
+        return '%s/%d' % (self._address.to_string(), self._mask)
 
     def get_address(self):
         return self._address
@@ -41,7 +44,8 @@ class Network:
 
 
     def get_broadcast_address(self):
-        bin_address = ''.join([bin(int(x) + 256)[3:] for x in self._address.to_string().split('.')])
+        bin_address = ''.join([bin(int(x) + 256)[3:]
+                               for x in self._address.to_string().split('.')])
         broadcast_max = 32 - self._mask
         counter = 0
         bit_sequence = ''
@@ -82,3 +86,10 @@ class Network:
 
         total_free_bit = 32 - self._mask
         return (2**total_free_bit) - 2
+
+    def get_subnets(self):
+        new_mask = self._mask - 1
+        subnet_free = bin(self._address.to_long())[2:]
+        print(subnet_free)
+
+        raise AttributeError
