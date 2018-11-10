@@ -91,3 +91,14 @@ class Network:
         total_free_bit = 32 - self._mask
         return (2**total_free_bit) - 2
 
+    def get_subnets(self):
+        if self._mask == 32 or self._mask == 31:
+            raise InvalidNetwork('Mask too large for subnet!')
+
+        half_subnet_hosts = self.get_total_hosts() / 2
+        subnets = self._address.to_long() + half_subnet_hosts + 1
+
+        return [Network(IPv4Address(self._address.to_long()), self._mask + 1),
+                Network(IPv4Address(int(subnets)), self._mask + 1)]
+
+
