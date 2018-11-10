@@ -70,7 +70,7 @@ class Network:
                 return False
 
             return True
-        except ValueError:
+        except Exception:
             return False
 
     def is_public(self):
@@ -90,10 +90,4 @@ class Network:
 
         total_free_bit = 32 - self._mask
         return (2**total_free_bit) - 2
-
-    def get_subnets(self):
-        new_mask = self._mask - 1
-        subnet_free = str(bin(self._address.to_long())[2:])
-        print(subnet_free)
-
 
