@@ -93,7 +93,7 @@ class Network:
 
     def get_subnets(self):
         if self._mask == 32 or self._mask == 31:
-            raise InvalidNetwork('Mask too large for subnet!')
+            raise InvalidNetwork('subnet mask too large!')
 
         half_subnet_hosts = self.get_total_hosts() / 2
         subnets = self._address.to_long() + half_subnet_hosts + 1
