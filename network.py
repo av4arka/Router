@@ -9,7 +9,7 @@ class Network:
         if type(address) is not IPv4Address:
             raise InvalidIPv4Address('Invalid address!')
 
-        if  mask < 0 or mask > 32 or type(mask) is not int:
+        if mask < 0 or mask > 32 or type(mask) is not int:
             raise InvalidNetwork('Invalid network mask!')
         self._mask = mask
 
@@ -45,7 +45,6 @@ class Network:
 
     def get_mask_length(self):
         return self._mask
-
 
     def get_broadcast_address(self):
         bin_address = ''.join([bin(int(x) + 256)[3:]
