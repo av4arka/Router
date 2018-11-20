@@ -62,7 +62,7 @@ class Router:
 
 
     def valid_routes(self, routes):
-        if type(routes) is not list or len(routes) == 0:
+        if type(routes) is not list or not len(routes):
             return False
 
         for route in routes:
