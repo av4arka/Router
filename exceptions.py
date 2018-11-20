@@ -1,12 +1,17 @@
-class InvalidIPv4Address(Exception):
+class MainException(Exception):
 
 
     def __init__(self, text):
-        InvalidIPv4Address.text = text
+        MainException.text = text
 
+class InvalidIPv4Address(MainException):
+    pass
 
-class InvalidNetwork(Exception):
+class InvalidNetwork(MainException):
+    pass
 
+class InvalidRoute(MainException):
+    pass
 
-    def __init__(self, text):
-        InvalidNetwork.text = text
+class InvalidRouter(MainException):
+    pass
