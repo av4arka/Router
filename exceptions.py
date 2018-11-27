@@ -1,6 +1,5 @@
 class MainException(Exception):
 
-
     def __init__(self, text):
         MainException.text = text
 
@@ -14,4 +13,7 @@ class InvalidRoute(MainException):
     pass
 
 class InvalidRouter(MainException):
+    pass
+
+class InvalidEchoServer(MainException):
     pass

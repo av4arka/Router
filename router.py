@@ -4,7 +4,6 @@ from exceptions import InvalidRoute, InvalidRouter
 
 class Route:
 
-
     def valid_arguments(self, network, gateway, interface_name, metric):
         try:
             if not isinstance(gateway, IPv4Address):
