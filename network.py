@@ -4,15 +4,20 @@ from exceptions import InvalidNetwork, InvalidIPv4Address
 
 class Network:
 
-
-    def __init__(self, address, mask):
+    def valid_network(self, address, mask):
         if type(address) is not IPv4Address:
-            raise InvalidIPv4Address('Invalid address!')
+            return False
 
         if  mask < 0 or mask > 32 or type(mask) is not int:
-            raise InvalidNetwork('Invalid network mask!')
-        self._mask = mask
+            return False
 
+        return True
+
+    def __init__(self, address, mask):
+        if not self.valid_network(address, mask):
+            raise InvalidNetwork('Invalid network!')
+
+        self._mask = mask
         bin_address = bin(address.to_long())[2:]
         bin_mask = bin(IPv4Address(self.get_mask_string()).to_long())[2:]
         network_address = IPv4Address(int(bin_address, 2) & int(bin_mask, 2))
