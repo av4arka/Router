@@ -23,6 +23,7 @@ if __name__ == '__main__':
     route5 = Route(network5, None, '5', 5)
     router = Router([route1])
 
+    router.add_route(route1)
     router.add_route(route2)
     router.add_route(route3)
     router.add_route(route4)
@@ -30,17 +31,18 @@ if __name__ == '__main__':
 
     router.remove_route(route2)
     router.remove_route(route4)
-    # route = router.get_route_for_address(IPv4Address('192.168.0.176'))
-    # print(route.metric)
-    # print(route.interface_name)
-    # net = route.network
-    # print(net)
-    #
-    # route = router.get_route_for_address(IPv4Address('10.0.1.1'))
-    # print(route.metric)
-    # print(route.interface_name)
-    # net = route.network
-    # print(net)
-    #
-    for r in router.routes:
-        print(r)
+
+    route = router.get_route_for_address(IPv4Address('192.168.0.176'))
+    print(route.metric)
+    print(route.interface_name)
+    net = route.network
+    print(net)
+
+    route = router.get_route_for_address(IPv4Address('10.0.1.1'))
+    print(route.metric)
+    print(route.interface_name)
+    net = route.network
+    print(net)
+
+    for route in router.routes:
+        print(route)
