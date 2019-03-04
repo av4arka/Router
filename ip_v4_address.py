@@ -2,38 +2,8 @@ from exceptions import InvalidIPv4Address
 
 class IPv4Address:
 
-    def valid_address(self, address):
-        if isinstance(address, int):
-            max = 4294967295
-
-            if address > max or address < 0:
-                return False
-            else:
-                return True
-
-        try:
-            max = 4
-            index = 0
-
-            octet = address.split('.')
-            if len(octet) > max:
-                return False
-
-            while index < max:
-                if int(octet[index]) < 0 or int(octet[index]) > 255:
-                    return False
-                if octet[index][0] == '0' and len(octet[index]) != 1:
-                    return False
-                if octet[index][0] == '-':
-                    return False
-                index += 1
-
-        except Exception:
-            return False
-        return True
-
     def __init__(self, address):
-        if self.valid_address(address) is False:
+        if valid_address(address) is False:
             raise InvalidIPv4Address('Invalid address!')
         self._ip = address
 
@@ -66,7 +36,7 @@ class IPv4Address:
         return '.'.join(address)
 
     def less_than(self, address):
-        if self.valid_address(address):
+        if valid_address(address):
             address2 = IPv4Address(address)
             return self.convert_ip_to_number() < address2.convert_ip_to_number()
         raise InvalidIPv4Address('Invalid address!')
@@ -75,7 +45,7 @@ class IPv4Address:
         return not self.less_than(address)
 
     def equals(self, address):
-        if self.valid_address(address):
+        if valid_address(address):
             address2 = IPv4Address(address)
 
             return self.convert_ip_to_number() == address2.convert_ip_to_number()
@@ -86,6 +56,31 @@ class IPv4Address:
 
     def to_long(self):
         return self.convert_ip_to_number()
+
+def valid_address(address):
+    if isinstance(address, int):
+        max = 4294967295
+        if address > max or address < 0:
+            return False
+        else:
+            return True
+    try:
+        max = 4
+        index = 0
+        octet = address.split('.')
+        if len(octet) > max:
+            return False
+        while index < max:
+            if int(octet[index]) < 0 or int(octet[index]) > 255:
+                return False
+            if octet[index][0] == '0' and len(octet[index]) != 1:
+                return False
+            if octet[index][0] == '-':
+                return False
+            index += 1
+    except Exception:
+        return False
+    return True
 
 if __name__ == '__main__':
     address = IPv4Address('127.0.0.1')

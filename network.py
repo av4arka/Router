@@ -4,15 +4,8 @@ from exceptions import InvalidNetwork
 
 class Network:
 
-    def valid_network(self, address, mask):
-        if not isinstance(address, IPv4Address):
-            return False
-        if mask < 0 or mask > 32 or not isinstance(mask, int):
-            return False
-        return True
-
     def __init__(self, address, mask):
-        if not self.valid_network(address, mask):
+        if not valid_network(address, mask):
             raise InvalidNetwork('Invalid network!')
 
         self._mask = mask
@@ -100,6 +93,12 @@ class Network:
         return [Network(IPv4Address(self._address.to_long()), self._mask + 1),
                 Network(IPv4Address(int(second_subnet)), self._mask + 1)]
 
+def valid_network(address, mask):
+    if not isinstance(address, IPv4Address):
+        return False
+    if mask < 0 or mask > 32 or not isinstance(mask, int):
+        return False
+    return True
 
 if __name__ == '__main__':
     address = IPv4Address('192.0.0.0')
