@@ -14,6 +14,3 @@ class InvalidRoute(MainException):
 
 class InvalidRouter(MainException):
     pass
-
-class InvalidEchoServer(MainException):
-    pass
