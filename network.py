@@ -1,16 +1,14 @@
-from ip_v4_address import  IPv4Address
-from exceptions import InvalidNetwork, InvalidIPv4Address
+from ip_v4_address import IPv4Address
+from exceptions import InvalidNetwork
 
 
 class Network:
 
     def valid_network(self, address, mask):
-        if type(address) is not IPv4Address:
+        if not isinstance(address, IPv4Address):
             return False
-
-        if  mask < 0 or mask > 32 or type(mask) is not int:
+        if mask < 0 or mask > 32 or not isinstance(mask, int):
             return False
-
         return True
 
     def __init__(self, address, mask):
@@ -25,7 +23,7 @@ class Network:
         self._address = network_address
 
     def __repr__(self):
-        return '%s/%d' % (self._address.to_string(), self._mask)
+        return f'{self._address.to_string()}/{self._mask}'
 
     @property
     def address(self):
@@ -43,14 +41,11 @@ class Network:
         last_address = self.get_broadcast_address().to_long() - 1
         return IPv4Address(last_address)
 
-
     def get_mask_string(self):
-        ip_address = IPv4Address(self.mask).to_string()
-        return ip_address
+        return IPv4Address(self.mask).to_string()
 
     def get_mask_length(self):
         return self._mask
-
 
     def get_broadcast_address(self):
         bin_address = ''.join([bin(int(x) + 256)[3:]
@@ -59,11 +54,10 @@ class Network:
         counter = 0
         bit_sequence = ''
 
-        while counter < broadcast_max:
+        for counter in range(broadcast_max):
             bit_sequence += '1'
-            counter += 1
 
-        broadcast_address = bin_address[0:self._mask] + bit_sequence
+        broadcast_address = bin_address[:self._mask] + bit_sequence
         return IPv4Address(int(broadcast_address, 2))
 
     def contains(self, address):
@@ -101,9 +95,35 @@ class Network:
             raise InvalidNetwork('subnet mask too large!')
 
         half_subnet_hosts = self.get_total_hosts() / 2
-        subnets = self._address.to_long() + half_subnet_hosts + 1
+        second_subnet = self._address.to_long() + half_subnet_hosts + 1
 
         return [Network(IPv4Address(self._address.to_long()), self._mask + 1),
-                Network(IPv4Address(int(subnets)), self._mask + 1)]
+                Network(IPv4Address(int(second_subnet)), self._mask + 1)]
 
 
+if __name__ == '__main__':
+    address = IPv4Address('192.0.0.0')
+    network = Network(address, 24)
+
+    print(network)
+    print(network.address.to_string())
+    print(network.get_first_usable_address().to_string())
+    print(network.get_last_usable_address().to_string())
+    print(network.get_mask_string())
+    print(network.get_mask_length())
+    print(network.is_public())
+    print(network.contains(IPv4Address('127.0.0.1')))
+    print(network.contains(IPv4Address('192.0.0.42')))
+    print(network.get_total_hosts())
+    print(network.get_broadcast_address().to_string())
+    print()
+
+    subnets = network.get_subnets()
+
+    print(subnets[0])
+    print(subnets[1])
+    print(subnets[0].address.to_string())
+    print(subnets[0].get_first_usable_address().to_string())
+    print(subnets[0].get_last_usable_address().to_string())
+    print(subnets[0].get_broadcast_address().to_string())
+    print(subnets[0].get_mask_length())
