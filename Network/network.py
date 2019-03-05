@@ -8,6 +8,11 @@ class Network:
         if not valid_network(address, mask):
             raise InvalidNetwork('Invalid network!')
 
+<<<<<<< HEAD:Network/network.py
+=======
+        if mask < 0 or mask > 32 or type(mask) is not int:
+            raise InvalidNetwork('Invalid network mask!')
+>>>>>>> origin/master:network.py
         self._mask = mask
         bin_address = bin(address.to_long())[2:]
         bin_mask = bin(IPv4Address(self.get_mask_string()).to_long())[2:]
