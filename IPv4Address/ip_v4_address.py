@@ -3,7 +3,7 @@ from exceptions import InvalidIPv4Address
 class IPv4Address:
 
     def __init__(self, address):
-        if valid_address(address) is False:
+        if not valid_address(address):
             raise InvalidIPv4Address('Invalid address!')
         self._ip = address
 
