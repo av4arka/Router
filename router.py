@@ -125,3 +125,4 @@ if __name__ == '__main__':
     print('\nRoutes:')
     for route in router.routes:
         print(route)
+

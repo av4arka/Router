@@ -96,3 +96,4 @@ if __name__ == '__main__':
     print(address.greater_than('10.10.1.1'))
     print(address.greater_than(543070343))
     print(address.less_than('25.38.38.5'))
+
