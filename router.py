@@ -1,5 +1,5 @@
-from Router.network import Network
-from Router.ip_v4_address import IPv4Address
+from network import Network
+from ip_v4_address import IPv4Address
 from exceptions import InvalidRoute, InvalidRouter, InvalidIPv4Address
 
 
