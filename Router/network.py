@@ -1,4 +1,4 @@
-from IPv4Address.ip_v4_address import IPv4Address
+from Router.ip_v4_address import IPv4Address
 from exceptions import InvalidNetwork
 
 
