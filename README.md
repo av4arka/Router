@@ -33,12 +33,13 @@ print(route) # default route - net: 0.0.0.0/0, interface: default, metric: 10
 ##### Usage example:
 ```python
 address = IPv4Address('127.0.0.1')
-print(address.to_long())
-print(address.to_string())
-print(address.equals('127.0.1.1'))
-print(address.equals(2130706433))
-print(address.greater_than('10.10.1.1'))
-print(address.less_than(2130706432))
+
+print(address.to_long()) # 2130706433
+print(address.to_string()) # 127.0.0.1
+print(address.equals('127.0.1.1')) # False
+print(address.equals(2130706433)) # True
+print(address.greater_than('10.10.1.1')) # True
+print(address.less_than(2130706432)) # False
 
 ```
 #### Network:
