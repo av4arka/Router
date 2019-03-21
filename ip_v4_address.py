@@ -8,16 +8,10 @@ class IPv4Address:
         self._ip = address
 
     def convert_ip_to_number(self):
-        pow = 3
-        num = 0
-
         if isinstance(self._ip, int):
             return self._ip
-
-        for octet in self._ip.split('.'):
-            num += (int(octet) * (256 ** pow))
-            pow -= 1
-        return num
+        octet = self._ip.split('.')
+        return (int(octet[0]) << 24) + (int(octet[1]) << 16) + (int(octet[2]) << 8) + (int(octet[3]))
 
     def convert_number_to_ip(self):
         div = 16777216
