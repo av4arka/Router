@@ -36,10 +36,10 @@ address = IPv4Address('127.0.0.1')
 
 print(address.to_long()) # 2130706433
 print(address.to_string()) # 127.0.0.1
-print(address.equals('127.0.1.1')) # False
-print(address.equals(2130706433)) # True
-print(address.greater_than('10.10.1.1')) # True
-print(address.less_than(2130706432)) # False
+print(address == '127.0.1.1') # False
+print(address == 2130706433) # True
+print(address > '10.10.1.1') # True
+print(address < 2130706432) # False
 
 ```
 #### Network:
@@ -52,6 +52,7 @@ network = Network(address, 24)
 print(network) # 192.168.0.0/24
 print(network.get_first_usable_address().to_string()) # 192.168.0.1
 print(network.get_last_usable_address().to_string()) # 192.168.0.254
+print(IPv4Address('172.0.1.1') in network) # True
 print(network.get_total_hosts()) # 254
 print(network.get_broadcast_address().to_string()) # 192.168.0.255
 
