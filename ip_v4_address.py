@@ -6,6 +6,7 @@ class IPv4Address:
         if not valid_address(address):
             raise InvalidIPv4Address('Invalid address!')
         self._ip = address
+        self._ip = self.convert_ip_to_number()
 
     def convert_ip_to_number(self):
         if isinstance(self._ip, int):
