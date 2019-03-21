@@ -41,7 +41,9 @@ class Route:
 
 class Router:
 
-    def __init__(self, routes=[]):
+    def __init__(self, routes=None):
+        if routes is None:
+            routes = []
         if not valid_routes(routes):
             raise InvalidRouter('Invalid router!')
 
