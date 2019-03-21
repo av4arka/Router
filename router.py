@@ -1,5 +1,5 @@
-from Network.network import Network
-from IPv4Address.ip_v4_address import IPv4Address
+from network import Network
+from ip_v4_address import IPv4Address
 from exceptions import InvalidRoute, InvalidRouter, InvalidIPv4Address
 
 
@@ -41,7 +41,9 @@ class Route:
 
 class Router:
 
-    def __init__(self, routes=[]):
+    def __init__(self, routes=None):
+        if routes is None:
+            routes = []
         if not valid_routes(routes):
             raise InvalidRouter('Invalid router!')
 
